@@ -1,0 +1,29 @@
+//Login with a username:
+GET http://localhost:3000/api/user/
+content-type: application/json
+
+{
+    "name": "test",
+    "password": "testspassword"
+}
+
+###
+//Login with a email:
+GET http://localhost:3000/api/user/
+content-type: application/json
+
+{
+    "name": "test@mail.com",
+    "password": "testspassword"
+}
+
+###
+//Register new user:
+POST http://localhost:3000/api/user/
+content-type: application/json
+
+{
+    "name": "test",
+    "email": "test@mail.com",
+    "password": "testpassword"
+}
