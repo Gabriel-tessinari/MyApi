@@ -1,12 +1,9 @@
-const { 
-    getUser,
-    postUser } = require('../usecases/user.usecase');
-
+const UserUsecase = require('../usecases/UserUsecase');
 
 const login = async (req, res) => {
     try {
         const { name, password } = req.body;
-        const user = await getUser(name, password);
+        const user = await UserUsecase.getUser(name, password);
 
         if(user == undefined) {
             res.status(422).send('Usuário não cadastrado.\nNome/Email ou Senha incorreto.');
@@ -22,7 +19,7 @@ const login = async (req, res) => {
 const registerNewUser = async (req, res) => {
     try {
         const user = req.body;
-        const response = await postUser(user);
+        const response = await UserUsecase.postUser(user);
 
         res.status(response.code).send(response.message);
     }
