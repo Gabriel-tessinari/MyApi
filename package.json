@@ -1,7 +1,7 @@
 {
-  "name": "dndapi",
+  "name": "myapi",
   "version": "1.0.0",
-  "description": "To save my character sheet.",
+  "description": "Studying",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
