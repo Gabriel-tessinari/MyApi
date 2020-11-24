@@ -1,8 +1,4 @@
-const { 
-    findUserByNameAndPassword, 
-    findUserByEmailAndPassword,
-    saveUser, 
-    findUserByNameAndEmail } = require('../database/user.database.gateway');
+const UserDBGateway = require('../database/UserDBGateway');
 
 const { 
     isValidEmail, 
@@ -13,11 +9,11 @@ const {
 const getUser = async (userData, userPassword) => {
     try {
         if(isValidEmail(userData) && isValidPassword(userPassword)) {
-            const user = await findUserByEmailAndPassword(userData, userPassword);
+            const user = await UserDBGateway.findUserByEmailAndPassword(userData, userPassword);
             return user;
         }
         else if(isValidName(userData) && isValidPassword(userPassword)) {
-            const user = await findUserByNameAndPassword(userData, userPassword);
+            const user = await UserDBGateway.findUserByNameAndPassword(userData, userPassword);
             return user;
         }
         else {
@@ -35,7 +31,7 @@ const postUser = async (user) => {
         const response = { code: '', message: '' };
 
         if(isValidEmail(email) && isValidName(name) && isValidPassword(password)) {
-            const verifyDB = findUserByNameAndEmail(name, email);
+            const verifyDB = UserDBGateway.findUserByNameAndEmail(name, email);
 
             if(verifyDB != undefined) {
                 response.code = 422;
@@ -43,7 +39,7 @@ const postUser = async (user) => {
                 return response;
             }
             else {
-                await saveUser(user);
+                await UserDBGateway.saveUser(user);
                 response.code = 200;
                 response.message = 'Cadastro efetuado com sucesso.';
                 return response;
