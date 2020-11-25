@@ -7,9 +7,9 @@ class UserController {
             const { name, password } = req.body;
             const user = await UserUsecase.getUser(name, password);
     
-            if(user == undefined) {
+            if(!user) {
                 res.status(422)
-                .json({ message: 'Usuário não cadastrado.\nNome/Email ou Senha incorreto.' });
+                .json({ message: 'Usuário não cadastrado. Nome/Email ou Senha incorreto.' });
             }
     
             res.json(user);

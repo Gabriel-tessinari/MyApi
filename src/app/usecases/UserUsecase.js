@@ -1,18 +1,15 @@
 const UserDBGateway = require('../database/UserDBGateway');
 
-const { 
-    isValidEmail, 
-    isValidName, 
-    isValidPassword } = require('../validators/user.validator');
+const UserValidator = require('../validators/UserValidator');
 
 class UserUsecase {
     async getUser(userData, userPassword) {
         try {
-            if(isValidEmail(userData) && isValidPassword(userPassword)) {
+            if(UserValidator.isValidEmail(userData) && UserValidator.isValidPassword(userPassword)) {
                 const user = await UserDBGateway.findUserByEmailAndPassword(userData, userPassword);
                 return user;
             }
-            else if(isValidName(userData) && isValidPassword(userPassword)) {
+            else if(UserValidator.isValidName(userData) && UserValidator.isValidPassword(userPassword)) {
                 const user = await UserDBGateway.findUserByNameAndPassword(userData, userPassword);
                 return user;
             }
@@ -30,10 +27,10 @@ class UserUsecase {
             const { name, email, password } = user;
             const response = { code: '', message: '' };
     
-            if(isValidEmail(email) && isValidName(name) && isValidPassword(password)) {
+            if(UserValidator.isValidEmail(email) && UserValidator.isValidName(name) && UserValidator.isValidPassword(password)) {
                 const verifyDB = UserDBGateway.findUserByNameAndEmail(name, email);
     
-                if(verifyDB != undefined) {
+                if(verifyDB) {
                     response.code = 422;
                     response.message = 'Usuário já cadastrado.';
                     return response;
