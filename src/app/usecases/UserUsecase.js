@@ -1,17 +1,17 @@
 const UserDBGateway = require('../database/UserDBGateway');
 
-const UserValidator = require('../validators/UserValidator');
+const UserService = require('../services/UserService');
 
 class UserUsecase {
-    async getUser(userData, userPassword) {
+    async login(userData, userPassword) {
         try {
-            if(UserValidator.isValidEmail(userData) && UserValidator.isValidPassword(userPassword)) {
+            if(UserService.isValidEmail(userData) && UserService.isValidPassword(userPassword)) {
                 const user = await UserDBGateway.findUserByEmailAndPassword(userData, userPassword);
-                return user;
+                return { user, token: UserService.generateToken(user) };
             }
-            else if(UserValidator.isValidName(userData) && UserValidator.isValidPassword(userPassword)) {
+            else if(UserService.isValidName(userData) && UserService.isValidPassword(userPassword)) {
                 const user = await UserDBGateway.findUserByNameAndPassword(userData, userPassword);
-                return user;
+                return { user, token: UserService.generateToken(user) };
             }
             else {
                 return undefined;
@@ -22,12 +22,12 @@ class UserUsecase {
         }
     }
 
-    async postUser(user) {
+    async register(user) {
         try {
             const { name, email, password } = user;
             const response = { code: '', message: '' };
     
-            if(UserValidator.isValidEmail(email) && UserValidator.isValidName(name) && UserValidator.isValidPassword(password)) {
+            if(UserService.isValidEmail(email) && UserService.isValidName(name) && UserService.isValidPassword(password)) {
                 const verifyDB = UserDBGateway.findUserByNameAndEmail(name, email);
     
                 if(verifyDB) {

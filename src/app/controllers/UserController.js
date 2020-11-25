@@ -5,7 +5,7 @@ class UserController {
     async login(req, res) {
         try {
             const { name, password } = req.body;
-            const user = await UserUsecase.getUser(name, password);
+            const user = await UserUsecase.login(name, password);
     
             if(!user) {
                 res.status(422)
@@ -23,7 +23,7 @@ class UserController {
     async registerNewUser(req, res) {
         try {
             const user = req.body;
-            const response = await UserUsecase.postUser(user);
+            const response = await UserUsecase.register(user);
     
             res.status(response.code)
             .json({ message: response.message });
