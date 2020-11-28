@@ -28,7 +28,7 @@ class UserUsecase {
             const response = { code: '', message: '' };
     
             if(UserService.isValidEmail(email) && UserService.isValidName(name) && UserService.isValidPassword(password)) {
-                const verifyDB = UserDBGateway.findUserByNameAndEmail(name, email);
+                const verifyDB = await UserDBGateway.findUserByNameAndEmail(name, email);
     
                 if(verifyDB) {
                     response.code = 422;
@@ -47,6 +47,21 @@ class UserUsecase {
                 response.message = 'Dados para cadastro são inválidos.';
                 return response;
             }  
+        }
+        catch(err) {
+            console.log(err);
+            return err;
+        }
+    }
+
+    async delete(userName) {
+        try {
+            const response = { code: '', message: '' };
+    
+            await UserDBGateway.deleteUserByName(userName);
+            response.code = 200;
+            response.message = `${ userName }: Conta deletada com sucesso.`;
+            return response;
         }
         catch(err) {
             console.log(err);
