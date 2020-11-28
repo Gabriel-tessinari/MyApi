@@ -4,8 +4,8 @@ class UserController {
 
     async login(req, res) {
         try {
-            const { name, password } = req.body;
-            const user = await UserUsecase.login(name, password);
+            const {  name , password } = req.body;
+            const user = await UserUsecase.login( name , password);
     
             if(!user) {
                 res.status(422)
@@ -32,6 +32,21 @@ class UserController {
             console.log(err);
             res.status(400)
             .json({ message: 'Erro ao registrar usuário.' });
+        }
+    }
+
+    async deleteAccount(req, res) {
+        try {
+            const { name } = req.body;
+            const response = await UserUsecase.delete(name);
+    
+            res.status(response.code)
+            .json({ message: response.message });
+        }
+        catch(err) {
+            console.log(err);
+            res.status(400)
+            .json({ message: 'Erro ao deletar usuário.' });
         }
     }
 }

@@ -10,6 +10,9 @@
   - Pensei em uma api nodejs, com banco postgres.
   - Comecei fazendo a funcionalidade de login e cadastro de usuário. Tentado organizar e nomear as pastas.
   - Até markdown, pra deixa esse texto arrumado, eu tô aprendendo como fazer.
+  - Adicionei verificação e validação de token.
+  - Adicionei a funcionalidade de deletar usuário do banco.
+  - Adicionei configuração para debugar o código, no VSCode.
 
 #### Observações:
 Pra eu poder usar, esse código, de referência. Se precisar.
