@@ -25,28 +25,6 @@ class UserController {
         }
     }
 
-    async novoLogin(req, res) {
-        try {
-            const auth = req.headers.authorization;
-            const [, encodedAuth] = auth.split(' ');
-            const emailAndPass = Buffer.from(encodedAuth, 'base64').toString();
-            const [email, password] = emailAndPass.split(':');
-
-            const user = await UserUsecase.novoLogin(email, password);
-    
-            if(!user) {
-                res.status(422)
-                .json({ message: 'Usuário não cadastrado. Email ou Senha incorreto.' });
-            }
-    
-            res.json(user);
-        }
-        catch(err) {
-            res.status(400)
-            .json({ message: 'Erro ao procurar por usuário.' });
-        }
-    }
-
     async registerNewUser(req, res) {
         try {
             const user = req.body;

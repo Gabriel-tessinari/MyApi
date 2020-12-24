@@ -33,7 +33,7 @@ class UserUsecase {
                 }
                 else {
                     await UserDBGateway.saveUser(user);
-                    response.code = 200;
+                    response.code = 201;
                     response.message = 'Cadastro efetuado com sucesso.';
                     return response;
                 }
