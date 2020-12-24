@@ -3,14 +3,10 @@ const UserDBGateway = require('../database/UserDBGateway');
 const UserService = require('../services/UserService');
 
 class UserUsecase {
-    async login(userData, userPassword) {
+    async login(email, password) {
         try {
-            if(UserService.isValidEmail(userData) && UserService.isValidPassword(userPassword)) {
-                const user = await UserDBGateway.findUserByEmailAndPassword(userData, userPassword);
-                return { user, token: UserService.generateToken(user) };
-            }
-            else if(UserService.isValidName(userData) && UserService.isValidPassword(userPassword)) {
-                const user = await UserDBGateway.findUserByNameAndPassword(userData, userPassword);
+            if(UserService.isValidEmail(email) && UserService.isValidPassword(password)) {
+                const user = await UserDBGateway.findUserByEmailAndPassword(email, password);
                 return { user, token: UserService.generateToken(user) };
             }
             else {

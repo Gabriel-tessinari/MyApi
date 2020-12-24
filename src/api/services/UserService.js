@@ -14,6 +14,14 @@ class UserService {
         return !(name === '' || name === undefined);
     }
 
+    generateUserFromAuthorization(auth) {
+        const [, encodedAuth] = auth.split(' ');
+        const emailAndPass = Buffer.from(encodedAuth, 'base64').toString();
+        const [email, password] = emailAndPass.split(':');
+
+        return { email, password };
+    }
+
     generateToken(user) {
         return jwt.sign({ id: user.id }, process.env.APP_SECRET);
     }

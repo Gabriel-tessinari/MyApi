@@ -1,21 +1,8 @@
-//Login with an username:
-GET http://localhost:3000/api/user/
-content-type: application/json
-
-{
-    "name": "test",
-    "password": "testpassword"
-}
-
 ###
-//Login with an email:
+//Login:
 GET http://localhost:3000/api/user/
 content-type: application/json
-
-{
-    "name": "test@mail.com",
-    "password": "testpassword"
-}
+Authorization: Basic dGVzdEBtYWlsLmNvbTp0ZXN0cGFzc3dvcmQ=
 
 ###
 //Register new user:
