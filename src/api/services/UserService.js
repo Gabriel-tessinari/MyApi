@@ -23,7 +23,7 @@ class UserService {
     }
 
     generateToken(user) {
-        return jwt.sign({ id: user.id }, process.env.APP_SECRET);
+        return 'Bearer ' + jwt.sign({ id: user.id }, process.env.APP_SECRET);
     }
 }
 
