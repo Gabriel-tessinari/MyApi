@@ -1,15 +1,42 @@
 const UserUsecase = require('../usecases/UserUsecase');
 
+const UserService = require('../services/UserService');
+
 class UserController {
 
     async login(req, res) {
         try {
-            const {  name , password } = req.body;
-            const user = await UserUsecase.login( name , password);
+            const auth = req.headers.authorization;
+
+            const { email, password } = UserService.generateUserFromAuthorization(auth);
+
+            const user = await UserUsecase.login(email, password);
     
             if(!user) {
                 res.status(422)
-                .json({ message: 'Usuário não cadastrado. Nome/Email ou Senha incorreto.' });
+                .json({ message: 'Usuário não cadastrado. Email ou Senha incorreto.' });
+            }
+    
+            res.json(user);
+        }
+        catch(err) {
+            res.status(400)
+            .json({ message: 'Erro ao procurar por usuário.' });
+        }
+    }
+
+    async novoLogin(req, res) {
+        try {
+            const auth = req.headers.authorization;
+            const [, encodedAuth] = auth.split(' ');
+            const emailAndPass = Buffer.from(encodedAuth, 'base64').toString();
+            const [email, password] = emailAndPass.split(':');
+
+            const user = await UserUsecase.novoLogin(email, password);
+    
+            if(!user) {
+                res.status(422)
+                .json({ message: 'Usuário não cadastrado. Email ou Senha incorreto.' });
             }
     
             res.json(user);
