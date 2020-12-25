@@ -17,10 +17,6 @@ content-type: application/json
 
 ###
 //Delete account:
-DELETE http://localhost:3000/api/user/
+DELETE http://localhost:3000/api/user/4
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA2NTkyNDYyfQ.GHjafWC-XC6Pxow2FVaulJ5XyzN03S4H4tM8EwpnEuU
-
-{
-    "name": "test"
-}

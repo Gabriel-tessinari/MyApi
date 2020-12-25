@@ -9,6 +9,6 @@ router.post('/', UserController.registerNewUser);
 
 router.use(TokenAuthenticator.authenticate);
 
-router.delete('/', UserController.deleteAccount);
+router.delete('/:userId', UserController.deleteAccount);
 
 module.exports = router;

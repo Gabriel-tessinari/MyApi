@@ -35,9 +35,9 @@ class UserDBGateway {
                          [name, email, password]);
     }
 
-    async deleteUserByName(userName) {
+    async deleteUserById(userId) {
         await pool.query('DELETE FROM users ' +
-                         'WHERE name = $1', [userName]);
+                         'WHERE id = $1', [userId]);
     }
 }
 

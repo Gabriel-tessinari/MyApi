@@ -7,11 +7,12 @@ class UserUsecase {
         try {
             if(UserService.isValidEmail(email) && UserService.isValidPassword(password)) {
                 const user = await UserDBGateway.findUserByEmailAndPassword(email, password);
-                return { user, token: UserService.generateToken(user) };
+                if(user) {
+                    return { user, token: UserService.generateToken(user) };
+                }
             }
-            else {
-                return undefined;
-            }
+
+            return undefined;
         }
         catch(err) {
             return err;
@@ -50,13 +51,13 @@ class UserUsecase {
         }
     }
 
-    async delete(userName) {
+    async delete(userId) {
         try {
             const response = { code: '', message: '' };
     
-            await UserDBGateway.deleteUserByName(userName);
+            await UserDBGateway.deleteUserById(userId);
             response.code = 200;
-            response.message = `${ userName }: Conta deletada com sucesso.`;
+            response.message = 'Conta deletada com sucesso.';
             return response;
         }
         catch(err) {
