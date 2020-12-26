@@ -1,17 +1,8 @@
 const pool = require('../../config/database');
 
 class UserDBGateway {
-    async findUserByNameAndPassword(userName, userPassword) {
-        const user = await pool.query('SELECT id, name FROM users ' +
-                                      'WHERE name = $1 ' +
-                                      'AND password = crypt($2, password)', 
-                                      [userName, userPassword]);
-
-        return user.rows[0];
-    }
-
     async findUserByEmailAndPassword(userEmail, userPassword) {
-        const user = await pool.query('SELECT id, name FROM users ' +
+        const user = await pool.query('SELECT * FROM users ' +
                                       'WHERE email = $1 ' +
                                       'AND password = crypt($2, password)',
                                       [userEmail, userPassword]);
@@ -19,11 +10,9 @@ class UserDBGateway {
         return user.rows[0];
     }
 
-    async findUserByNameAndEmail(userName, userEmail) {
+    async findUserByEmail(userEmail) {
         const user = await pool.query('SELECT id, name FROM users ' +
-                                      'WHERE name = $1 ' +
-                                      'OR email = $2',
-                                      [userName, userEmail]);
+                                      'WHERE email = $1', [userEmail]);
 
         return user.rows[0];
     }

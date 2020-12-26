@@ -8,6 +8,7 @@ class UserUsecase {
             if(UserService.isValidEmail(email) && UserService.isValidPassword(password)) {
                 const user = await UserDBGateway.findUserByEmailAndPassword(email, password);
                 if(user) {
+                    user.password = null;
                     return { user, token: UserService.generateToken(user) };
                 }
             }
@@ -25,7 +26,7 @@ class UserUsecase {
             const response = { code: '', message: '' };
     
             if(UserService.isValidEmail(email) && UserService.isValidName(name) && UserService.isValidPassword(password)) {
-                const verifyDB = await UserDBGateway.findUserByNameAndEmail(name, email);
+                const verifyDB = await UserDBGateway.findUserByEmail(email);
     
                 if(verifyDB) {
                     response.code = 422;

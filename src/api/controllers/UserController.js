@@ -42,7 +42,7 @@ class UserController {
 
     async deleteAccount(req, res) {
         try {
-            const id = req.params.userId;
+            const id = req.params.id;
             const response = await UserUsecase.delete(id);
     
             res.status(response.code)
