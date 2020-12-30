@@ -17,6 +17,19 @@ content-type: application/json
 
 ###
 //Delete account:
-DELETE http://localhost:3000/api/user/8
+DELETE http://localhost:3000/api/user/14
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjA4OTUwMjI2LCJleHAiOjE2MDkwMzY2MjZ9.MoSiqyF4wz8MyuaeHjeLzkHY7-2UXYFwe8Gmj4mmLH0
+Authorization: Gerar token válido no Login
+
+###
+//Update user:
+PUT http://localhost:3000/api/user/
+content-type: application/json
+Authorization: Gerar token válido no Login
+
+{
+    "id": 14,
+    "name": "",
+    "email": "test@t.com",
+    "password": "testpassword"
+}

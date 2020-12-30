@@ -11,7 +11,7 @@ class UserService {
     }
 
     isValidName(name) {
-        return !(name === '' || name === undefined);
+        return !(name.length <= 2 || name === '' || name === undefined);
     }
 
     generateUserFromAuthorization(auth) {

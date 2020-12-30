@@ -1,16 +1,19 @@
 const UserUsecase = require('../usecases/UserUsecase');
+const UpdateUseCase = require('../usecases/UpdateUseCase');
+const RegisterUseCase = require('../usecases/RegisterUseCase');
+const DeleteUseCase = require('../usecases/DeleteUseCase');
+const LoginUseCase = require('../usecases/LoginUseCase');
 
 const UserService = require('../services/UserService');
 
 class UserController {
-
     async login(req, res) {
         try {
             const auth = req.headers.authorization;
 
             const { email, password } = UserService.generateUserFromAuthorization(auth);
 
-            const user = await UserUsecase.login(email, password);
+            const user = await LoginUseCase.login(email, password);
     
             if(!user) {
                 res.status(422)
@@ -28,7 +31,7 @@ class UserController {
     async registerNewUser(req, res) {
         try {
             const user = req.body;
-            const response = await UserUsecase.register(user);
+            const response = await RegisterUseCase.register(user);
     
             res.status(response.code)
             .json({ message: response.message });
@@ -43,7 +46,7 @@ class UserController {
     async deleteAccount(req, res) {
         try {
             const id = req.params.id;
-            const response = await UserUsecase.delete(id);
+            const response = await DeleteUseCase.delete(id);
     
             res.status(response.code)
             .json({ message: response.message });
@@ -52,6 +55,21 @@ class UserController {
             console.log(err);
             res.status(400)
             .json({ message: 'Erro ao deletar usuário.' });
+        }
+    }
+
+    async updateUser(req, res) {
+        try {
+            const user = req.body;
+            const response = await UpdateUseCase.updateUser(user);
+
+            res.status(response.code)
+            .json({ message: response.message });
+        }
+        catch(err) {
+            console.log(err);
+            res.status(400)
+            .json({ message: 'Erro ao alterar dados do usuário.' });
         }
     }
 }
