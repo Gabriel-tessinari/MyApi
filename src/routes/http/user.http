@@ -17,19 +17,35 @@ content-type: application/json
 
 ###
 //Delete account:
-DELETE http://localhost:3000/api/user/14
+DELETE http://localhost:3000/api/user/15
 content-type: application/json
-Authorization: Gerar token válido no Login
+Authorization: Pegar token válido no Login
 
 ###
 //Update user:
 PUT http://localhost:3000/api/user/
 content-type: application/json
-Authorization: Gerar token válido no Login
+Authorization: Pegar token válido no Login
 
 {
-    "id": 14,
-    "name": "",
-    "email": "test@t.com",
+    "id": 16,
+    "name": "Api Test",
+    "email": "test@api.com",
     "password": "testpassword"
+}
+
+###
+//Change password:
+PUT http://localhost:3000/api/user/password
+content-type: application/json
+Authorization: Pegar token válido no Login
+
+{
+    "user": {
+        "id": 16,
+        "name": "Api Test",
+        "email": "test@api.com",
+        "password": "testpassword"
+    },
+    "newPassword": "apipass"
 }

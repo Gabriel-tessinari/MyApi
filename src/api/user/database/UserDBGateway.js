@@ -40,6 +40,13 @@ class UserDBGateway {
                          'WHERE id = $3', 
                          [name, email, id]);
     }
+
+    async changePassword(userId, newPassword) {
+        await pool.query('UPDATE users ' +
+                         'SET password = crypt($1, gen_salt(\'bf\')) ' +
+                         'WHERE id = $2',
+                         [newPassword, userId]);
+    }
 }
 
 module.exports = new UserDBGateway();
