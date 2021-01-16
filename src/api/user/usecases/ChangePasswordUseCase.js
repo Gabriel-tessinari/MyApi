@@ -17,8 +17,8 @@ class ChangePasswordUseCase {
             .findUserByEmailAndPassword(user.email, user.password);
 
             if(!userToUpdate) {
-                response.code = 404;
-                response.message = 'Usuário não encontrado.';
+                response.code = 422;
+                response.message = 'Senha atual incorreta.';
                 return response;
             }
 
