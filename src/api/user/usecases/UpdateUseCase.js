@@ -25,11 +25,20 @@ class UpdateUseCase {
                 return response;
             }
 
-            if(user.name != '') {
+            if(user.name) {
                 userToUpdate.name = user.name;
             }
 
-            if(user.email != '' && user.password != '') {
+            if(user.email && user.password) {
+                const userEmailVerifier = await UserDBGateway
+                .findUserByEmail(user.email);
+
+                if(userEmailVerifier) {
+                    response.code = 422;
+                    response.message = 'Email já vinculado a outro usuário.';
+                    return response;
+                }
+
                 const userVerifyPassword = await UserDBGateway
                 .findUserByEmailAndPassword(userToUpdate.email, user.password);
 
