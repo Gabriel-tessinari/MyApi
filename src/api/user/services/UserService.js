@@ -11,7 +11,7 @@ class UserService {
     }
 
     isValidName(name) {
-        return !(name === '' || name === undefined);
+        return !(name.length <= 2 || name === '' || name === undefined);
     }
 
     generateUserFromAuthorization(auth) {
@@ -23,7 +23,8 @@ class UserService {
     }
 
     generateToken(user) {
-        return jwt.sign({ id: user.id }, process.env.APP_SECRET);
+        return 'Bearer ' + 
+        jwt.sign({ id: user.id }, process.env.APP_SECRET, { expiresIn: '1d' });
     }
 }
 

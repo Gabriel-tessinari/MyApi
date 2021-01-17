@@ -2,13 +2,15 @@ const router = require('express').Router();
 
 const TokenAuthenticator = require('../api/middleware/TokenAuthenticator');
 
-const UserController = require('../api/controllers/UserController');
+const userController = require('../api/user/controllers/UserController');
 
-router.get('/', UserController.login);
-router.post('/', UserController.registerNewUser);
+router.get('/', userController.login);
+router.post('/', userController.registerNewUser);
 
 router.use(TokenAuthenticator.authenticate);
 
-router.delete('/', UserController.deleteAccount);
+router.delete('/:id', userController.deleteAccount);
+router.put('/', userController.updateUser);
+router.put('/password', userController.changePassword);
 
 module.exports = router;

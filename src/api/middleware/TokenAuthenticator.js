@@ -13,11 +13,10 @@ class TokenAuthenticator {
         const [, token] = authHeader.split(' ');
 
         try {
-            const decoded = await promisify(jwt.verify)(token, process.env.APP_SECRET);
-    
-            req.userId = decoded.id;
+            await promisify(jwt.verify)(token, process.env.APP_SECRET);
     
             return next();
+            
         } catch(err) {
             return res.status(401).json({ message: 'Token inválido.' });
         }
