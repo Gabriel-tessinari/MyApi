@@ -18,5 +18,5 @@ Pra eu poder usar, esse código, de referência. Se precisar.
 
 **Rotas**
 - Ver index.js.
-- Ver src/api/routes/**.routes.js.
-- src/api/routes/http, tem exemplos de como são as chamadas dessas rotas.
+- Ver src/routes/**.routes.js.
+- src/routes/http, tem exemplos de como são as chamadas dessas rotas.
