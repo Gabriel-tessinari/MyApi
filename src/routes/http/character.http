@@ -1,0 +1,13 @@
+###
+//Register new user:
+POST http://localhost:3000/api/character/
+content-type: application/json
+
+{    
+    "userId": 0,
+    "name": "Test",
+    "race": "Raça",
+    "class": "Classe",
+    "level": 0,
+    "exp": 0
+}
