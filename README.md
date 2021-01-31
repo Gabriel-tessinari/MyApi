@@ -27,8 +27,3 @@ Pra eu poder usar, esse código, de referência. Se precisar.
 - Ver index.js.
 - Ver src/routes/**.routes.js.
 - src/routes/http/**.http, tem exemplos de como são as chamadas dessas rotas.
-
-**Branch dev**
-- O projeto tá diferente lá.
-- Segui os passos de um vídeo, sobre tdd com jest para a parte de testes. Futuramente vou tentar implementar isso aqui. Fica lá de exemplo.
-- Link do vídeo, que segui, no README de lá.
